@@ -14,6 +14,9 @@ public class Main {
         System.out.println("Welcome to the Genshin Reactions Assignment \n[1] Start Game \n[2] Quit");
         String menu = input.nextLine();
         if(menu.equals("1")){
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
             System.out.println("What Reaction would you like to use!   \n[1] Vaporize           (Amber and Xingqiu) \n" +
                                                                         "[2] Melt               (Amber and Kaeya) \n" +
                                                                         "[3] Overloaded         (Amber and Lisa)\n" +
@@ -21,30 +24,42 @@ public class Main {
                                                                         "[5] Frozen             (Kaeya and Xingqiu) \n" +
                                                                         "[6] Electro-Charged    (Lisa and Xingqiu)");
             String reaction = input.nextLine();
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
             switch (reaction){
                 case "1":
-                    System.out.println(characters[1]);
-                    System.out.println(characters[3]);
+                    System.out.println(Amber);
+                    System.out.println(Xingqiu);
+                    break;
                 case "2":
-                    System.out.println();
+                    System.out.println(Amber);
                     System.out.println(Kaeya);
+                    break;
                 case "3":
                     System.out.println(Amber);
                     System.out.println(Lisa);
+                    break;
                 case "4":
                     System.out.println(Kaeya);
                     System.out.println(Lisa);
+                    break;
                 case "5":
                     System.out.println(Kaeya);
                     System.out.println(Xingqiu);
+                    break;
                 case "6":
                     System.out.println(Lisa);
                     System.out.println(Xingqiu);
+                    break;
                 default:
-                    System.out.println("Please Pick a usable option!");
+                    System.out.println("Please pick a viable option");
             }
         }
         if (menu.equals("2")){
+            for (int i = 0; i < 50; i++) {
+                System.out.println();
+            }
             System.out.println("Thank you for playing!");
         }
     }
