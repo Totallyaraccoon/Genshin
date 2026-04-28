@@ -12,18 +12,23 @@ public class Main {
         Character[] characters = new Character[]{Kaeya, Amber, Lisa, Xingqiu};
         Enemy ruinguard = new Enemy(200);
         //Main Menu
-        System.out.println("Welcome to the Genshin Reactions Assignment \n[1] Start Game \n[2] Quit");
+        System.out.println("""
+                               Welcome to the Genshin Reactions Assignment
+                               [1] Start Game
+                               [2] Quit""");
         String menu = input.nextLine();
         if(menu.equals("1")){
             for (int i = 0; i < 50; i++) {
                 System.out.println();
             }
-            System.out.println("What Reaction would you like to use!   \n[1] Vaporize           (Amber and Xingqiu) \n" +
-                                                                        "[2] Melt               (Amber and Kaeya) \n" +
-                                                                        "[3] Overloaded         (Amber and Lisa)\n" +
-                                                                        "[4] Superconduct       (Kaeya and Lisa) \n" +
-                                                                        "[5] Frozen             (Kaeya and Xingqiu) \n" +
-                                                                        "[6] Electro-Charged    (Lisa and Xingqiu)");
+            System.out.println("""
+                               What Reaction would you like to use!
+                               [1] Vaporize           (Amber and Xingqiu)
+                               [2] Melt               (Amber and Kaeya)
+                               [3] Overloaded         (Amber and Lisa)
+                               [4] Superconduct       (Kaeya and Lisa)
+                               [5] Frozen             (Kaeya and Xingqiu)
+                               [6] Electro-Charged    (Lisa and Xingqiu)""");
             String reaction = input.nextLine();
             for (int i = 0; i < 50; i++) {
                 System.out.println();

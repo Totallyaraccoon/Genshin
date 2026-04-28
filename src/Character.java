@@ -10,7 +10,9 @@ public class Character {
         this.name = name;
         this.element = element;
         this.wepType = wepType;
-        this.maxEnergy= maxEnergy;    }
+        this.maxEnergy= maxEnergy;
+        energy = maxEnergy/2;
+    }
     public String toString(){
         return ("Name: " + name + " Element: " +  element + " Weapon: " + wepType + " Max Energy: " + maxEnergy);
     }

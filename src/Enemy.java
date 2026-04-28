@@ -3,6 +3,6 @@ public class Enemy {
     String auraElement = ("");
     Double auraGU = 0.0;
     public Enemy(int hp){
-
+        this.hp = hp;
     }
 }
