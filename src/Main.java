@@ -10,6 +10,7 @@ public class Main {
         Character Lisa = new Character("Lisa", "Electro", "Grimoire", 60);
         Character Xingqiu = new Character("Xingqiu", "Hydro", "Sword", 80);
         Character[] characters = new Character[]{Kaeya, Amber, Lisa, Xingqiu};
+        Enemy ruinguard = new Enemy(200);
         //Main Menu
         System.out.println("Welcome to the Genshin Reactions Assignment \n[1] Start Game \n[2] Quit");
         String menu = input.nextLine();
