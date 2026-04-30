@@ -16,4 +16,7 @@ public class Character {
     public String toString(){
         return ("Name: " + name + " Element: " +  element + " Weapon: " + wepType + " Max Energy: " + maxEnergy);
     }
+    public int checkEnergy(){
+        return energy;
+    }
 }

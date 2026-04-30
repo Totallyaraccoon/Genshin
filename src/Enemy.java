@@ -5,4 +5,7 @@ public class Enemy {
     public Enemy(int hp){
         this.hp = hp;
     }
+    public int checkHp(){
+        return hp;
+    }
 }
