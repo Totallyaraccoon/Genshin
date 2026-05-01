@@ -19,4 +19,13 @@ public class Character {
     public int checkEnergy(){
         return energy;
     }
+    public String checkname(){
+        return name;
+    }
+    public String checkElement(){
+        return element;
+    }
+    public int checkMaxeneg() {
+        return maxEnergy;
+    }
 }

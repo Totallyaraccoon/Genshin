@@ -8,4 +8,7 @@ public class Enemy {
     public int checkHp(){
         return hp;
     }
+    public void takedmg(int dmg){
+        hp -= dmg;
+    }
 }

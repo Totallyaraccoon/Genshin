@@ -9,10 +9,11 @@ public class Game {
     Character[] chosenChars = new Character[2];
     Scanner input = new Scanner(System.in);
     Enemy ruinguard = new Enemy(200);
+    public int count = 0;
     int hp = 100;
 
-    public void game(){
-
+    public Boolean run(){
+        return (ruinguard.checkHp()<0);
     }
 
     public void startMenu(){
@@ -52,32 +53,32 @@ public class Game {
             case "1":
                 chosenChars[0] = Amber;
                 chosenChars[1] = Xingqiu;
-                fight();
+                showStatus();
                 break;
             case "2":
                 chosenChars[0] = Amber;
                 chosenChars[1] = Kaeya;
-                fight();
+                showStatus();
                 break;
             case "3":
                 chosenChars[0] = Amber;
                 chosenChars[1] = Lisa;
-                fight();
+                showStatus();
                 break;
             case "4":
                 chosenChars[0] = Kaeya;
                 chosenChars[1] = Lisa;
-                fight();
+                showStatus();
                 break;
             case "5":
                 chosenChars[0] = Kaeya;
                 chosenChars[1] = Xingqiu;
-                fight();
+                showStatus();
                 break;
             case "6":
                 chosenChars[0] = Lisa;
                 chosenChars[1] = Xingqiu;
-                fight();
+                showStatus();
                 break;
             default:
                 System.out.println("Please pick a viable option");
@@ -86,14 +87,67 @@ public class Game {
         }
     }
     public void fight(){
-        showStatus();
+        System.out.println("Which character will go first [1] " + chosenChars[0].checkname() + " [2] " + chosenChars[1].checkname());
+        String goFirst = input.nextLine();
+        count += 1;
+        System.out.println("Turn "+ count);
+        switch (goFirst){
+            case "1":
+                attackOne();
+                showStatus();
+                break;
+            case "2":
+
+                showStatus();
+                break;
+            default:
+                System.out.println("please pick a viable option!");
+                showStatus();
+        }
+
     }
     public void showStatus(){
         System.out.println(chosenChars[0]);
         System.out.println(chosenChars[1]);
-        System.out.println(chosenChars[0].checkEnergy());
-        System.out.println(chosenChars[1].checkEnergy());
-        System.out.println(hp);
-        System.out.println(ruinguard.checkHp());
+        System.out.println(chosenChars[0].checkname()+" Energy: "+chosenChars[0].checkEnergy());
+        System.out.println(chosenChars[1].checkname()+ " Energy: "+chosenChars[1].checkEnergy());
+        System.out.println("Player HP: "+hp);
+        System.out.println("Enemy HP: "+ruinguard.checkHp());
+        fight();
+    }
+    public void attackOne(){
+        System.out.println("Character 1\n[1] Normal Attack (Physical, 10 dmg, +5)\n[2] Elemental Skill ("+ chosenChars[0].checkElement() +", 2U, 20 dmg, +10 burst)\n[3] Elemental Burst ("+ chosenChars[0].checkElement()+", 2U 30 dmg, requires "+chosenChars[0].checkMaxeneg()+")");
+        String attack = input.nextLine();
+        switch (attack){
+            case "1":
+                System.out.println(chosenChars[0].checkname() + " uses Normal Attack! (Physical, 10 dmg)");
+                ruinguard.takedmg(10);
+                if (ruinguard.checkHp()<0){
+                    System.out.println("Ruin Guard Defeated!!!");
+                }
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Please put a viable option!");
+        }
+    }
+    public void attackTwo(){
+        System.out.println("Character 2\n[1] Normal Attack (Physical, 10 dmg, +5)\n[2] Elemental Skill ("+ chosenChars[1].checkElement() +", 2U, 20 dmg, +10 burst)\n[3] Elemental Burst ("+ chosenChars[1].checkElement()+", 2U 30 dmg, requires "+ chosenChars[1].checkMaxeneg() +")");
+        String attackTwo = input.nextLine();
+        switch (attackTwo){
+            case "1":
+                System.out.println(chosenChars[0].checkname() + " uses Normal Attack! (Physical, 10 dmg)");
+                ruinguard.takedmg(10);
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            default:
+                System.out.println("Please put a viable option!");
+        }
     }
 }
