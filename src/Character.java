@@ -28,4 +28,7 @@ public class Character {
     public int checkMaxeneg() {
         return maxEnergy;
     }
+    public int addEnergy(int add){
+        return (energy+=add);
+    }
 }

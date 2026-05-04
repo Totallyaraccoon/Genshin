@@ -9,6 +9,8 @@ public class Game {
     Character[] chosenChars = new Character[2];
     Scanner input = new Scanner(System.in);
     Enemy ruinguard = new Enemy(200);
+    double gu = 0.0;
+    String Aura;
     public int count = 0;
     int hp = 100;
 
@@ -97,7 +99,7 @@ public class Game {
                 showStatus();
                 break;
             case "2":
-
+                attackTwo();
                 showStatus();
                 break;
             default:
@@ -122,16 +124,34 @@ public class Game {
             case "1":
                 System.out.println(chosenChars[0].checkname() + " uses Normal Attack! (Physical, 10 dmg)");
                 ruinguard.takedmg(10);
-                if (ruinguard.checkHp()<0){
-                    System.out.println("Ruin Guard Defeated!!!");
-                }
+                chosenChars[0].addEnergy(5);
                 break;
             case "2":
+                System.out.println(chosenChars[0].checkname() + " uses Elemental Skill! ("+chosenChars[0].checkElement() +",2U , 20 dmg)");
+                ruinguard.takedmg(20);
+                chosenChars[0].addEnergy(10);
+                ruinguard.addElement(chosenChars[0].checkElement());
+                gu = 2.0;
+                resolve(chosenChars[0].checkElement(), 20);
                 break;
             case "3":
+                if (chosenChars[0].checkEnergy()==chosenChars[0].checkMaxeneg()) {
+                    System.out.println(chosenChars[0].checkname() + " uses Elemental Burst! (" + chosenChars[0].checkElement() + ",2U , 30 dmg)");
+                    ruinguard.takedmg(30);
+                    ruinguard.addElement(chosenChars[0].checkElement());
+                    resolve(chosenChars[0].checkElement(), 30);
+                }
+                else {
+                    System.out.println("Not enough energy.");
+                    attackTwo();
+                }
                 break;
             default:
                 System.out.println("Please put a viable option!");
+
+        }
+        if (ruinguard.checkHp()<0){
+            System.out.println("Ruin Guard Defeated!!!");
         }
     }
     public void attackTwo(){
@@ -139,15 +159,92 @@ public class Game {
         String attackTwo = input.nextLine();
         switch (attackTwo){
             case "1":
-                System.out.println(chosenChars[0].checkname() + " uses Normal Attack! (Physical, 10 dmg)");
+                System.out.println(chosenChars[1].checkname() + " uses Normal Attack! (Physical, 10 dmg)");
                 ruinguard.takedmg(10);
+                chosenChars[1].addEnergy(5);
                 break;
             case "2":
+                System.out.println(chosenChars[1].checkname() + " uses Elemental Skill! ("+chosenChars[1].checkElement() +",2U , 20 dmg)");
+                ruinguard.takedmg(20);
+                chosenChars[1].addEnergy(10);
+                ruinguard.addElement(chosenChars[1].checkElement());
+                resolve(chosenChars[1].checkElement(), 20);
                 break;
             case "3":
+                if (chosenChars[1].checkEnergy()==chosenChars[1].checkMaxeneg()) {
+                    System.out.println(chosenChars[1].checkname() + " uses Elemental Burst! (" + chosenChars[1].checkElement() + ",2U , 30 dmg)");
+                    ruinguard.takedmg(30);
+                    ruinguard.addElement(chosenChars[1].checkElement());
+                    resolve(chosenChars[1].checkElement(), 30);
+                }
+                else {
+                    System.out.println("Not enough energy.");
+                    attackTwo();
+                }
                 break;
             default:
                 System.out.println("Please put a viable option!");
         }
     }
-}
+    public int resolve(String atkElement, int dmg){
+        //vapo
+        if ((ruinguard.auraElement.equals("Hydro") && atkElement.equals("Pyro"))||(ruinguard.auraElement.equals("Pyro") && atkElement.equals("Hydro"))){
+            if ((ruinguard.auraElement.equals("Hydro") && atkElement.equals("Pyro"))){
+                ruinguard.clearAura();
+                return (int)(dmg * 2.0);
+            }
+            else { //hydro trigger
+                gu -= 1.0;
+                if (ruinguard.auraGU <= 0){
+                    ruinguard.clearAura();
+                    return (int)(dmg *1.5);
+                }
+            }
+        }
+        else if ((ruinguard.auraElement.equals("Pyro") && atkElement.equals("Cryo"))||(ruinguard.auraElement.equals("Cryo") && atkElement.equals("Pyro"))){
+            if ((ruinguard.auraElement.equals("Pyro") && atkElement.equals("Cryo"))){
+                ruinguard.clearAura();
+                return (int)(dmg * 2.0);
+            }
+            else { //Pyro trigger
+                gu -= 1.0;
+                if (ruinguard.auraGU <= 0){
+                    ruinguard.clearAura();
+                    return (int)(dmg *1.5);
+                }
+            }
+        }
+        else if ((ruinguard.auraElement.equals("Pyro") && atkElement.equals("Electro"))||(ruinguard.auraElement.equals("Electro") && atkElement.equals("Pyro"))){
+            if ((ruinguard.auraElement.equals("Pyro") && atkElement.equals("Electro"))){
+                ruinguard.clearAura();
+                return (int)(dmg * 2.0);
+            }
+            else { //Pyro trigger
+                gu -= 1.0;
+                if (ruinguard.auraGU <= 0){
+                    ruinguard.clearAura();
+                    return (int)(dmg *1.5);
+                }
+            }
+        }
+        else if ((ruinguard.auraElement.equals("Hydro") && atkElement.equals("Electro"))||(ruinguard.auraElement.equals("Electro") && atkElement.equals("Hydro"))){
+            if ((ruinguard.auraElement.equals("Hydro") && atkElement.equals("Electro"))){
+                ruinguard.clearAura();
+                return (int)(dmg * 2.75);
+            }
+            else { //Hydro trigger
+                gu -= 1.0;
+                if (ruinguard.auraGU <= 0){
+                    ruinguard.clearAura();
+                    return (int)(dmg *2.75);
+                }
+            }
+        }
+        else if ((ruinguard.auraElement.equals("Cryo") && atkElement.equals("Electro"))||(ruinguard.auraElement.equals("Electro") && atkElement.equals("Cryo"))){
+            ruinguard.clearAura();
+            return (int)(dmg*1.5);
+        }
+        return (0);
+        }
+
+    }

@@ -11,4 +11,12 @@ public class Enemy {
     public void takedmg(int dmg){
         hp -= dmg;
     }
+    public void addElement(String element){
+        if (auraElement.isEmpty()){
+            auraElement = element;
+        }
+    }
+    public void clearAura(){
+        auraElement = "";
+    }
 }
